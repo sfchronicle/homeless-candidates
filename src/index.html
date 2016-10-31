@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= json.project.title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="http://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <%= t.include("partials/_head.html") %>
+    <%= t.include("partials/_analytics.html") %>
+  </head>
+
+  <body>
+
+    <%= t.include("partials/_nav.html") %>
+
+
+    <div class="container">
+      <div class="branding">Beyond Homelessness</div>
+      <h1 class="title">How the candidates view homelessness</h1>
+      <p class="deck">A Chronicle voter guide: We reached out to the contenders for key state and local offices for their position on one of the region's most vital issues. Enter a name in the search bar below or click on a photo to see where they stand.</p>
+
+      <div id="input">Search:<input id="search" type="" name=""></div>
+      <div id="btn-cont"><button id="showall">View All</button></div>
+
+      <div id="mosaic">
+        <% json.HomelessCandidates_Sheet1.forEach(function(ppl) { 
+
+            if (ppl.photo){ %>
+
+              <div data-name="<%= ppl.candidate.toLowerCase() %>" class="thumbnail">
+              <img src="http://ww1.hdnux.com/photos/51/21/44/<%= ppl.photo %>/3/150x150.jpg?">
+              </div>
+
+            <%  } else { %>
+
+            <%  }
+
+        }); %>
+      </div>
+
+      <div id="candidates">
+       <% json.HomelessCandidates_Sheet1.forEach(function(ppl) { 
+
+            if (ppl.photo){ %>
+              
+              <div name="<%= ppl.candidate.toLowerCase() %>" class="candidate">
+              <h3><%= ppl.candidate %></h3>
+              <p class="seat">Running for: <%= ppl.seat %></p>
+                <div class="img">
+                  <img src="http://ww1.hdnux.com/photos/51/21/44/<%= ppl.photo %>/3/400x400.jpg?">
+                  <p class="byline"><%= ppl.photographer %></p>
+                </div>
+                <p><%= ppl.text %></p>
+              </div>
+
+            <%  } else { %>
+              
+              <div name="<%= ppl.candidate.toLowerCase() %>" class="candidate">
+              <h3><%= ppl.candidate %></h3>
+              <p class="seat">Running for: <%= ppl.seat %></p>
+              <p><%= ppl.text %></p>
+              </div>
+
+            <%  }
+            
+        }); %>
+      </div>
+
+
+    </div>     
+
+    <%= t.include("partials/_footer.html") %>
+
+    <script src="app.js" async></script>
+    <%= t.include("partials/_helloSFC.html") %>
+  </body>
+</html>
