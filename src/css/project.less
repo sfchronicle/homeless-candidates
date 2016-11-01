@@ -13,10 +13,12 @@
 	text-align:center;
 	margin-top:3.5em;
 	font-family:@banner;
-	color:@redlinks;
 	text-transform:uppercase;
 	font-size:0.8em;
 
+    a {
+      color:@redlinks;
+    }
 	@media @mobile{
 	font-size:0.7em;
 	}
@@ -24,7 +26,7 @@
 
 .deck{
 	text-align:center;
-	max-width:680px;
+	max-width:520px;
     font-size:0.84em;
 	font-family:Georgia;
 	margin-top:10px;
@@ -95,6 +97,15 @@
     .seat{
     font-size:0.7em;
     text-align:center;
+    margin-bottom:0;
+    }
+
+    .one{
+    max-width: 310px;
+    margin-bottom: 1em;
+    color: #d24949;
+    font-size:0.7em;
+    text-align:center;
     }
 }
 
@@ -102,7 +113,7 @@
     text-align: center;
     font-family:'AntennaExtraLight', Helvetica, sans-serif;
     font-size:0.85em;
-    margin-bottom:10px;
+    margin-bottom:0.5em;
 }
 
 #search{
@@ -126,6 +137,11 @@
     @media @mobile{
     margin-top:1em;
     }
+
+    .name{
+    font-size:12px;
+    padding:0;
+    }
 }
 
 .thumbnail{
@@ -133,7 +149,7 @@
     -ms-flex: 0 0 9%;
     flex: 0 0 9%;
     padding:0 3px;
-    cursor:cell;
+    cursor:pointer;
 
     @media (max-width:870px){
     -webkit-flex: 0 0 10%;
@@ -153,17 +169,17 @@
 }
 
 #btn-cont{
-    margin-bottom:1.5em;
+    display:inline-block;
 }
-#showall{
+#showall, .btm-showall{
     display: block;
     text-align: center;
     margin: 0 auto;
-    padding: 7px;
+    padding: 5px;
     cursor:pointer;
     background-color: #fbfbfb;
     border: 1px solid #ccc;
-    font-size: 0.6em;
+    font-size: 0.5em;
     color: @redlinks;
     border-radius: 0;
     text-transform: uppercase;
@@ -183,4 +199,89 @@ display:block;
 
 header{
     opacity:1;
+}
+
+.note{
+    display:block;
+    width: 100%;
+    font-size: 0.65em;
+    font-style: italic;
+    margin: 2em 0;
+    text-align: center;
+    padding:0 20px;
+
+    @media @mobile{
+      font-size:12px;
+    }
+}
+
+.creditcont {
+    max-width:722px;
+    width: 90%;
+    margin: 30px auto;
+    overflow: hidden;
+    border-top: 1px solid #d3d3d3;
+    padding-top: 2.5em;
+}
+
+.creditbox{
+    min-height:79px;
+    float: left;
+    margin-bottom: 20px;
+    margin-left: calc(1.66666667%);
+    margin-right: calc(1.66666667%);
+    font-size: 16px;
+    font-family: AntennaRegular;
+    text-align: center;
+
+    .title{
+    font-family: AntennaExtraLight; 
+    display: block; 
+    font-size: 12px
+    }
+
+    .email{
+    font-family: AntennaExtraLight; display: block; font-size: 13px
+    }
+
+    .twitter{
+    font-family: AntennaExtraLight; display: block; font-size: 13px
+    }
+}
+
+
+
+@media (max-width: 768px){
+.creditbox {
+    width: 45%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+}
+@media (max-width: 480px){
+.creditbox {
+    width: 100%;
+    margin-bottom: 30px;
+    margin-left: 0;
+    margin-right: 0;
+    min-height:0;
+}
+}
+
+.filter{
+    max-width: 900px;
+    margin: 0 auto 1em;
+    text-align: center;
+}
+
+#race-select{
+background-color: #fbfbfb;
+    border: 1px solid #ccc;
+    font-size: 0.6em;
+    font-family: 'AntennaExtraLight', Helvetica, sans-serif;
+
+    @media @mobile{
+    margin:0 0 1em 0;
+
+    }
 }

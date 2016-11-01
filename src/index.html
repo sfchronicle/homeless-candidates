@@ -1,14 +1,18 @@
 <!doctype html>
 <html>
   <head>
-    <title><%= json.project.title %></title>
+    <title>Where Bay Area and California candidates stand on homelessness</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="__sync_contentCategory" content="meterA">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="http://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://treg.hearstnp.com/treg.js"></script>
+<script type="text/javascript" src="http://www.sfchronicle.com/js/hdn/omniture/syncronex.js"></script>
+<script type="text/javascript" src="https://syncaccess-hst-sfc.syncronex.com/hst/sfc/api/scripts/syncwall"></script>
     <%= t.include("partials/_head.html") %>
     <%= t.include("partials/_analytics.html") %>
   </head>
@@ -19,20 +23,49 @@
 
 
     <div class="container">
-      <div class="branding">Beyond Homelessness</div>
+      <div class="branding"><a href="http://projects.sfchronicle.com/sf-homeless/" target="_blank">Beyond Homelessness</a></div>
       <h1 class="title">How the candidates view homelessness</h1>
-      <p class="deck">A Chronicle voter guide: We reached out to the contenders for key state and local offices for their position on one of the region's most vital issues. Enter a name in the search bar below or click on a photo to see where they stand.</p>
+      <p class="deck">Enter a name in the search bar below, sort by electoral race or click on a photo to see where the candidates stand.</p>
 
-      <div id="input">Search:<input id="search" type="" name=""></div>
-      <div id="btn-cont"><button id="showall">View All</button></div>
+      <div class="filter">
+
+        <div id="input">Search:<input id="search" type="" name=""></div>
+
+
+        <!-- Drop down race menu -->
+        <select id="race-select">
+
+          <option value="" disabled selected>View by race:</option>
+
+        <% json.HomelessCandidates_Sheet1.forEach(function(ppl) {
+
+          if (ppl.raceslug){ %>
+
+          <option value="<%= ppl.raceslug %>"><%= ppl.seat %></option>
+
+          <%  } else { %>
+
+            <%  }
+        
+        }); %>
+
+        </select>
+        <div id="btn-cont"><button id="showall">View All</button></div>
+      </div>
+
+
+      
 
       <div id="mosaic">
         <% json.HomelessCandidates_Sheet1.forEach(function(ppl) { 
 
+
             if (ppl.photo){ %>
 
-              <div data-name="<%= ppl.candidate.toLowerCase() %>" class="thumbnail">
+
+              <div data-name="<%= ppl.candidate %>" class="thumbnail <%= ppl.raceclass %>">
               <img src="http://ww1.hdnux.com/photos/51/21/44/<%= ppl.photo %>/3/150x150.jpg?">
+              <p class="name"><%= ppl.candidate %></p>
               </div>
 
             <%  } else { %>
@@ -40,35 +73,66 @@
             <%  }
 
         }); %>
+        <div class="note"><span>* Berkeley mayoral candidate Zachary RunningWolf is in jail and unable to participate. Berkeley mayoral candidate Naomi D. Pete declined to participate.</span></div>
       </div>
 
       <div id="candidates">
        <% json.HomelessCandidates_Sheet1.forEach(function(ppl) { 
 
-            if (ppl.photo){ %>
+            if (ppl.priority == "yes"){ %>
               
-              <div name="<%= ppl.candidate.toLowerCase() %>" class="candidate">
-              <h3><%= ppl.candidate %></h3>
-              <p class="seat">Running for: <%= ppl.seat %></p>
+              <div name="<%= ppl.candidate %>" class="candidate">
+                <h3><%= ppl.candidate %></h3>
+                <p class="seat">Running for: <%= ppl.seat %></p>
+                <p class="one">* Said they believe easing or ending homelessness is the region's top priority.</p>
                 <div class="img">
                   <img src="http://ww1.hdnux.com/photos/51/21/44/<%= ppl.photo %>/3/400x400.jpg?">
                   <p class="byline"><%= ppl.photographer %></p>
                 </div>
                 <p><%= ppl.text %></p>
+                <div class="filter">
+                  <div id="btn-cont"><button class="btm-showall">View All</button></div>
+                </div>
               </div>
+
+
 
             <%  } else { %>
               
-              <div name="<%= ppl.candidate.toLowerCase() %>" class="candidate">
-              <h3><%= ppl.candidate %></h3>
-              <p class="seat">Running for: <%= ppl.seat %></p>
-              <p><%= ppl.text %></p>
+              <div name="<%= ppl.candidate %>" class="candidate">
+                <h3><%= ppl.candidate %></h3>
+                <p class="seat">Running for: <%= ppl.seat %></p>
+                <p class="one">* Said they did not believe easing or ending homelessness is the region's top priority.</p>
+                <div class="img">
+                  <img src="http://ww1.hdnux.com/photos/51/21/44/<%= ppl.photo %>/3/400x400.jpg?">
+                  <p class="byline"><%= ppl.photographer %></p>
+                </div>
+                <p><%= ppl.text %></p>
+                <div class="filter">
+                  <div id="btn-cont"><button class="btm-showall">View All</button></div>
+                </div>
               </div>
 
             <%  }
             
         }); %>
+
+        
+        
       </div>
+
+      <div class="creditcont">
+
+        <div class="creditbox"><span class="title">Developer</span>Lucio Villa <span class="email"><a href="mailto:lvilla@sfchronicle.com">lvilla@sfchronicle.com</a></span><span class="twitter"><a href="http://twitter.com/luciovilla" target="_blank">@luciovilla</a></span></div>
+
+        <div class="creditbox"><span class="title">Research</span>Christina Noori <span class="email"><a href="mailto:cnoori@sfchronicle.com">cnoori@sfchronicle.com</a></span></div>
+
+        <div class="creditbox"><span class="title">Editor in Chief</span>Audrey Cooper <span class="email"><a href="mailto:acooper@sfchronicle.com">acooper@sfchronicle.com</a></span><span class="twitter"><a href="http://twitter.com/audreycoopersf" target="_blank">@audreycoopersf</a></span></div>
+
+        <div class="creditbox"><span class="title">Executive Producer</span>Tim O'Rourke <span class="email"><a href="mailto:torourke@sfchronicle.com@sfchronicle.com">torourke@sfchronicle.com</a></span><span class="twitter"><a href="http://twitter.com/TimothyORourke" target="_blank">@TimothyORourke</a></span></div>
+
+      </div>
+
 
 
     </div>     
